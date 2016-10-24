@@ -30,10 +30,10 @@ let config = Object.assign({}, baseConfig, {
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
   loader: 'react-hot!babel-loader',
-  include: [].concat(
-    config.additionalPaths,
-    [ path.join(__dirname, '/../src') ]
-  )
+  include: [].concat(config.additionalPaths, [path.join(__dirname, '/../src')])
+}, {
+  test: /\.css$/,
+  loader: 'style-loader!css-loader!postcss-loader'
 });
 
 module.exports = config;

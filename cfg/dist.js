@@ -11,6 +11,8 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 let HtmlwebpackPlugin = require('html-webpack-plugin');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+baseConfig.output.publicPath = './assets/';
+
 let config = Object.assign({}, baseConfig, {
   entry: {
     index: path.join(__dirname, '../src/index'),
@@ -60,8 +62,7 @@ config.module.loaders.push({
   include: [].concat(
     config.additionalPaths, [path.join(__dirname, '/../src')]
   )
-});
-config.module.loaders.push({
+}, {
   test: /\.css$/,
   loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader", {
     publicPath: './'
