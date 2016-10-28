@@ -36,12 +36,12 @@ let config = Object.assign({}, baseConfig, {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.js'
+      filename: 'vendor.[hash:8].js'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin("styles.[hash:8].css"),
     new HtmlwebpackPlugin({
       title: 'Hello World app',
       template: path.resolve('./src', 'index.html'),
