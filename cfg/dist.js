@@ -7,6 +7,7 @@ let baseConfig = require('./base');
 let defaultSettings = require('./defaults');
 
 // Add needed plugins here
+let WebpackMd5Hash = require('webpack-md5-hash');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 let HtmlwebpackPlugin = require('html-webpack-plugin');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -21,6 +22,7 @@ let config = Object.assign({}, baseConfig, {
 	cache: false,
 	devtool: 'cheap-module-source-map',
 	plugins: [
+		new WebpackMd5Hash(),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': '"production"'
@@ -38,7 +40,7 @@ let config = Object.assign({}, baseConfig, {
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
-		filename: 'vendor.[chunkhash:8].js'
+			filename: 'vendor.[chunkhash:8].js'
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
