@@ -14,59 +14,61 @@ let ExtractTextPlugin = require("extract-text-webpack-plugin");
 baseConfig.output.publicPath = './assets/';
 
 let config = Object.assign({}, baseConfig, {
-  entry: {
-    index: path.join(__dirname, '../src/index'),
-    vendor: ['react', 'react-dom', 'react-router']
-  },
-  cache: false,
-  devtool: 'cheap-module-source-map',
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    }),
-    new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.[hash:8].js'
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("styles.[hash:8].css"),
-    new HtmlwebpackPlugin({
-      title: 'Hello World app',
-      template: path.resolve('./src', 'index.html'),
-      filename: '../index.html',
-      //chunks: ['vendors', 'app'],
-      //要把script插入到标签里
-      inject: 'body',
-      hash: true
-    })
-  ],
-  module: defaultSettings.getDefaultModules()
+	entry: {
+		index: path.join(__dirname, '../src/index'),
+		vendor: ['react', 'react-dom', 'react-router']
+	},
+	cache: false,
+	devtool: 'cheap-module-source-map',
+	plugins: [
+		new webpack.optimize.DedupePlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': '"production"'
+		}),
+		new BowerWebpackPlugin({
+			searchResolveModulesDirectories: false
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			minimize: true,
+			compress: {
+				warnings: false,
+				drop_debugger: true,
+				drop_console: true
+			}
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+		filename: 'vendor.[chunkhash:8].js'
+		}),
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.optimize.AggressiveMergingPlugin(),
+		new webpack.NoErrorsPlugin(),
+		new ExtractTextPlugin("styles.[chunkhash:8].css"),
+		new HtmlwebpackPlugin({
+			title: 'Hello World app',
+			template: path.resolve('./src', 'index.html'),
+			filename: '../index.html',
+			//chunks: ['vendors', 'app'],
+			//要把script插入到标签里
+			inject: 'body',
+			hash: true
+		})
+	],
+	module: defaultSettings.getDefaultModules()
 });
 
 // Add needed loaders to the defaults here
 config.module.loaders.push({
-  test: /\.(js|jsx)$/,
-  loader: 'babel',
-  include: [].concat(
-    config.additionalPaths, [path.join(__dirname, '/../src')]
-  )
+	test: /\.(js|jsx)$/,
+	loader: 'babel',
+	include: [].concat(
+		config.additionalPaths, [path.join(__dirname, '/../src')]
+	)
 }, {
-  test: /\.css$/,
-  loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader", {
-    publicPath: './'
-  })
+	test: /\.css$/,
+	loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader", {
+		publicPath: './'
+	})
 });
 
 module.exports = config;
