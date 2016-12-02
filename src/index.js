@@ -1,23 +1,31 @@
-import 'core-js/fn/object/assign';
+import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/Main';
-import {
-	Router,
-	Route,
-	useRouterHistory,
-	IndexRoute
-} from 'react-router';
-import { createHashHistory } from 'history';
+import { render } from 'react-dom';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader';
+import configureStore from './store/configureStore';
+import Root from './containers/Root';
+import 'styles/index.css';
 
-const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
-import Home from './components/Home/Home'
-// Render the main component into the dom
-ReactDOM.render((
-	<Router history={appHistory}>
-		<Route path="/" component={App}>
-			<IndexRoute component={Home}/>
-		</Route>
-	</Router>
-), document.getElementById('app'));
+render(
+    <AppContainer>
+        <Root store={store} history={history} />
+    </AppContainer>,
+    document.getElementById('root')
+);
+
+if (module.hot) {
+    module.hot.accept('./containers/Root', () => {
+        const NewRoot = require('./containers/Root').default;
+        render(
+            <AppContainer>
+                <NewRoot store={store} history={history} />
+            </AppContainer>,
+            document.getElementById('root')
+        );
+    });
+}
