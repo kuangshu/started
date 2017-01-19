@@ -1,5 +1,10 @@
+import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 import logo from 'images/logo.svg';
+
+function mapStateToProps(state) {
+	return { state: state };
+}
 
 const App = ({ children }) =>
 	<div className="App">
@@ -17,4 +22,6 @@ App.PropTypes = {
 	children: PropTypes.object
 };
 
-export default App;
+export default connect(
+	mapStateToProps, {}
+)(App);
