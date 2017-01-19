@@ -7,9 +7,11 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
 import 'styles/index.css';
+import rootSaga from './middleware/saga'
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
+store.runSaga(rootSaga)
 
 render(
     <AppContainer>
