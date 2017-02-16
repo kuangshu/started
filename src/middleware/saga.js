@@ -1,12 +1,25 @@
-import { takeEvery, takeLatest } from 'redux-saga'
-import { call, put } from 'redux-saga/effects'
+import { take, call, put } from 'redux-saga/effects'
 import Api from './api'
+import * as actions from './actions'
 
-function* watchAndLog(getState) {
-  yield* takeEvery('*', function* logger(action) {
-    console.log('action', action)
-    console.log('state after', getState())
-  })
+/******************************************************************************/
+/***************************** Subroutines ************************************/
+/******************************************************************************/
+
+
+
+/******************************************************************************/
+/******************************* WATCHERS *************************************/
+/******************************************************************************/
+function* watchAndLog() {
+    const action = yield* take('*');
+    console.log('action', action);
+    console.log('state after');
 }
 
-export default watchAndLog;
+/******************************************************************************/
+export default function* root() {
+    yield [
+        fork(watchAndLog),
+    ]
+}
