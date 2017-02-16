@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import logo from 'images/logo.svg';
 
 function mapStateToProps(state) {
-	return { state: state };
+    return { state: state };
 }
 
 const App = ({ children }) =>
@@ -19,7 +19,7 @@ const App = ({ children }) =>
 	</div>
 
 App.PropTypes = {
-	children: PropTypes.object
+    children: PropTypes.object
 };
 
 export default connect(

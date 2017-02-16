@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 //import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import rootReducer from '../components/Home/reducer';
-import DevTools from '../containers/DevTools'
+import rootReducer from '../containers/rootReducer';
+import DevTools from '../containers/Root/DevTools'
 import createSagaMiddleware, { END } from 'redux-saga'
 
 const configureStore = preloadedState => {

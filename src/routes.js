@@ -5,7 +5,7 @@ import App from './containers/App';
 import Index from './components/Home/Index';
 
 export default (
-    <Route path="/" component={App}>
-        <IndexRoute component={Index} />
-    </Route>
+	<Route path="/vip" component={App}>
+		<IndexRoute component={Index} />
+	</Route>
 );
