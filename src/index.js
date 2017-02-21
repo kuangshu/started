@@ -5,11 +5,13 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/configureStore';
-import Root from './containers/Root';
+import Root from './containers/Root/index';
 import 'styles/index.css';
+import rootSaga from './middleware/saga'
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
+store.runSaga(rootSaga)
 
 render(
     <AppContainer>
@@ -19,8 +21,8 @@ render(
 );
 
 if (module.hot) {
-    module.hot.accept('./containers/Root', () => {
-        const NewRoot = require('./containers/Root').default;
+    module.hot.accept('./containers/Root/index', () => {
+        const NewRoot = require('./containers/Root/index').default;
         render(
             <AppContainer>
                 <NewRoot store={store} history={history} />

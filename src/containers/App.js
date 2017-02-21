@@ -1,5 +1,10 @@
+import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 import logo from 'images/logo.svg';
+
+function mapStateToProps(state) {
+    return { state: state };
+}
 
 const App = ({ children }) =>
 	<div className="App">
@@ -8,13 +13,15 @@ const App = ({ children }) =>
 			<h2>Welcome to React</h2>
 		</div>
 		<p className="App-intro">
-		To get started, edit <code>src/containers/Main.js</code> and save to reload.
+		To get started, edit <code>src/containers/App.js</code> and save to reload.
 		</p>
 		{children}
 	</div>
 
 App.PropTypes = {
-	children: PropTypes.object
+    children: PropTypes.object
 };
 
-export default App;
+export default connect(
+	mapStateToProps, {}
+)(App);
