@@ -67,8 +67,7 @@ module.exports = {
 		filename: 'static/js/[name].[chunkhash:8].js',
 		chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
 		// We inferred the "public path" (such as / or /my-project) from homepage.
-		//publicPath: publicPath
-		publicPath: './' //以相对路径开始,方便nginx
+		publicPath: publicPath
 	},
 	resolve: {
 		// This allows you to set a fallback for where Webpack should look for modules.
@@ -81,7 +80,9 @@ module.exports = {
 		// We also include JSX as a common component filename extension to support
 		// some tools, although we do not recommend using it, see:
 		// https://github.com/facebookincubator/create-react-app/issues/290
-		extensions: ['.js', '.json', '.jsx', ''],
+		//extensions: ['.js', '.json', '.jsx', ''],
+		modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
+  		extensions: ['', '.web.js', '.js', '.json'],
 		alias: {
 			// Support React Native Web
 			// https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
