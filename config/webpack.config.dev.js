@@ -10,6 +10,11 @@ var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeMod
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
 
+const svgDirs = [
+	require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+	path.resolve(paths.appSrc, './images/svg'),  // 2. 自己私人的 svg 存放目录
+];
+
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 var publicPath = '/';
@@ -135,7 +140,7 @@ module.exports = {
 			// When you `import` an asset, you get its (virtual) filename.
 			// In production, they would get copied to the `build` folder.
 			{
-				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
 				loader: 'file',
 				query: {
 					name: 'static/media/[name].[hash:8].[ext]'
@@ -150,7 +155,13 @@ module.exports = {
 					limit: 10000,
 					name: 'static/media/[name].[hash:8].[ext]'
 				}
-			}
+			},
+			// 添加SVG的打包
+			{
+				test: /\.(svg)$/i,
+				loader: 'svg-sprite',
+				include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+			},
 		]
 	},
 

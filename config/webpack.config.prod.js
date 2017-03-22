@@ -21,6 +21,11 @@ function ensureSlash(path, needsSlash) {
 	}
 }
 
+const svgDirs = [
+	require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+	path.resolve(paths.appSrc, './images/svg'),  // 2. 自己私人的 svg 存放目录
+];
+
 // We use "homepage" field to infer "public path" at which the app is served.
 // Webpack needs to know it to put the right <script> hrefs into HTML even in
 // single-page apps that may serve index.html for nested URLs like /todos/42.
@@ -147,7 +152,7 @@ module.exports = {
 			// "file" loader makes sure those assets end up in the `build` folder.
 			// When you `import` an asset, you get its filename.
 			{
-				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
 				loader: 'file',
 				query: {
 					name: 'static/media/[name].[hash:8].[ext]'
@@ -162,7 +167,13 @@ module.exports = {
 					limit: 10000,
 					name: 'static/media/[name].[hash:8].[ext]'
 				}
-			}
+			},
+			// 添加SVG的打包
+			{
+				test: /\.(svg)$/i,
+				loader: 'svg-sprite',
+				include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+			},
 		]
 	},
 
