@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/configureStore';
-import Root from './containers/Root/index';
+import Root from './root/index';
 import 'styles/index.css';
 import rootSaga from './middleware/saga'
 
@@ -24,8 +24,8 @@ render(
 );
 
 if (module.hot) {
-    module.hot.accept('./containers/Root/index', () => {
-        const NewRoot = require('./containers/Root/index').default;
+    module.hot.accept('./root/index', () => {
+        const NewRoot = require('./root/index').default;
         render(
             <AppContainer>
                 <NewRoot store={store} history={history} />
