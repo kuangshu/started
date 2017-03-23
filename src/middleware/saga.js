@@ -12,9 +12,11 @@ import * as actions from './actions'
 /******************************* WATCHERS *************************************/
 /******************************************************************************/
 function* watchAndLog() {
-    const action = yield* take('*');
-    console.log('action', action);
-    console.log('state after');
+    while(true) {
+        const action = yield take('*');
+        console.log('action', action);
+        console.log('state after');
+    }
 }
 
 /******************************************************************************/
