@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
-import logo from 'images/logo.svg';
+import logo from 'images/svg/logo.svg';
 
 function mapStateToProps(state) {
     return { state: state };
