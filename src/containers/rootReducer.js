@@ -1,5 +1,4 @@
 import merge from 'lodash/merge';
-import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
 const base = (state = '', action) => {
@@ -13,9 +12,8 @@ const base = (state = '', action) => {
     }
 };
 
-const rootReducer = combineReducers({
-    routing,
+const rootReducer = {
     base,
-});
+};
 
 export default rootReducer;
