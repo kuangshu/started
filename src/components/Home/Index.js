@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 function mapStateToProps(state) {
     return {
@@ -9,7 +10,7 @@ function mapStateToProps(state) {
 
 export class Index extends React.Component {
     static propTypes = {
-        name: React.PropTypes.string,
+        name: PropTypes.string,
     };
 
     constructor(props) {

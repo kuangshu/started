@@ -1,12 +1,9 @@
-import { connect } from 'react-redux';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import logo from 'images/svg/logo.svg';
+import { withRouter, Link, Route } from 'react-router-dom'
+import Home from '../components/Home'
 
-function mapStateToProps(state) {
-    return { state: state };
-}
-
-const App = ({ children }) =>
+const App = (props) => (
 	<div className="App">
 		<div className="App-header">
 			<svg className="App-logo" alt="logo" >
@@ -14,16 +11,17 @@ const App = ({ children }) =>
 			</svg>
 			<h2>Welcome to React</h2>
 		</div>
+		{JSON.stringify(props)}
 		<p className="App-intro">
 		To get started, edit <code>src/containers/App.js</code> and save to reload.
 		</p>
-		{children}
+		<br/>
+		<Link to='/about'>about</Link>
+		<br/>
+		<Link to='/home'>home</Link>
+		<br/>
+		<Route path='/home' component={Home} />
 	</div>
+)
 
-App.PropTypes = {
-    children: PropTypes.object
-};
-
-export default connect(
-	mapStateToProps, {}
-)(App);
+export default App;

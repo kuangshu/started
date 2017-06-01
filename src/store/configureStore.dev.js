@@ -1,28 +1,30 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-//import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 import rootReducer from '../containers/rootReducer';
-//import DevTools from '../containers/Root/DevTools'
 import createSagaMiddleware, { END } from 'redux-saga'
+import createLogger from 'redux-logger';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const configureStore = preloadedState => {
+const configureStore = (preloadedState, history) => {
     const sagaMiddleware = createSagaMiddleware();
+    const middleware = routerMiddleware(history);
 
     const store = createStore(
-        rootReducer,
+        combineReducers({
+            ...rootReducer,
+            router: routerReducer,
+        }),
         preloadedState,
         composeEnhancers(
             applyMiddleware(sagaMiddleware, createLogger()),
-            //DevTools.instrument()
         )
     );
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../components/Home/reducer', () => {
-            const nextRootReducer = require('../components/Home/reducer').default;
+        module.hot.accept('../containers/rootReducer.js', () => {
+            const nextRootReducer = require('../containers/rootReducer.js').default;
             store.replaceReducer(nextRootReducer);
         });
     }
