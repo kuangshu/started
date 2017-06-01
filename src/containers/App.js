@@ -16,7 +16,7 @@ const App = (props) => (
 		To get started, edit <code>src/containers/App.js</code> and save to reload.
 		</p>
 		<br/>
-		<Link to='/about'>about</Link>
+		<Link to='/'>index</Link>
 		<br/>
 		<Link to='/home'>home</Link>
 		<br/>
