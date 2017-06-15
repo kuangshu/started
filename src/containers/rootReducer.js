@@ -1,5 +1,4 @@
 import merge from 'lodash/merge';
-import { combineReducers } from 'redux';
 
 const base = (state = '', action) => {
     switch (action.type) {

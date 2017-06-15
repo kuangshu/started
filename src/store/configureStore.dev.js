@@ -8,7 +8,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configureStore = (preloadedState, history) => {
     const sagaMiddleware = createSagaMiddleware();
-    const middleware = routerMiddleware(history);
+    const rm = routerMiddleware(history);
 
     const store = createStore(
         combineReducers({
@@ -17,7 +17,7 @@ const configureStore = (preloadedState, history) => {
         }),
         preloadedState,
         composeEnhancers(
-            applyMiddleware(sagaMiddleware, createLogger()),
+            applyMiddleware(sagaMiddleware, rm, createLogger()),
         )
     );
 

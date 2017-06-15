@@ -89,7 +89,7 @@ module.exports = {
         // some tools, although we do not recommend using it, see:
         // https://github.com/facebookincubator/create-react-app/issues/290
         //extensions: ['.js', '.json', '.jsx'],
-        extensions: ['', '.web.js', '.js', '.json'],
+        extensions: ['.web.js', '.js', '.jsx', '.json'],
         alias: {
 
             // Support React Native Web
@@ -234,7 +234,7 @@ module.exports = {
             // Remember to add the new extension(s) to the "file" loader exclusion list.
 			{
 				test: /\.(svg)$/i,
-				loader: 'svg-sprite',
+				loader: 'svg-sprite-loader',
 				include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
 			},
         ],

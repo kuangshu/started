@@ -47,14 +47,13 @@ module.exports = {
         // the line below with these two lines if you prefer the stock client:
         // require.resolve('webpack-dev-server/client') + '?/',
         // require.resolve('webpack/hot/dev-server'),
-		require.resolve('react-dev-utils/webpackHotDevClient'),
-		'react-hot-loader/patch',
-		// We ship a few polyfills by default:
-		require.resolve('./polyfills'),
+        require.resolve('react-dev-utils/webpackHotDevClient'),
+        // We ship a few polyfills by default:
+        require.resolve('./polyfills'),
         // Errors should be considered fatal in development
         require.resolve('react-error-overlay'),
-		// Finally, this is your app's code:
-		paths.appIndexJs
+        // Finally, this is your app's code:
+        paths.appIndexJs,
 		// We include the app code last so that if there is a runtime error during
 		// initialization, it doesn't blow up the WebpackDevServer client, and
 		// changing JS code would still trigger a refresh.
@@ -90,7 +89,7 @@ module.exports = {
         // some tools, although we do not recommend using it, see:
         // https://github.com/facebookincubator/create-react-app/issues/290
         //extensions: ['.js', '.json', '.jsx'],
-        extensions: ['', '.web.js', '.js', '.json'],
+        extensions: ['.web.js', '.js', '.jsx', '.json'],
         alias: {
         
             // Support React Native Web
@@ -154,7 +153,7 @@ module.exports = {
                     /\.gif$/,
                     /\.jpe?g$/,
                     /\.png$/,
-                    /\.(svg)$/i,
+                    /\.(svg)$/,
                 ],
                 loader: require.resolve('file-loader'),
                 options: {
@@ -228,7 +227,7 @@ module.exports = {
 			// 添加SVG的打包
 			{
 				test: /\.(svg)$/i,
-				loader: 'svg-sprite',
+				loader: 'svg-sprite-loader',
 				include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
 			},
 		],

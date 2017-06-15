@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from 'images/svg/logo.svg';
-import { withRouter, Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
+import { connect } from 'react-redux';
 import Home from '../components/Home'
 
 const App = (props) => (
@@ -24,4 +25,9 @@ const App = (props) => (
 	</div>
 )
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        state: state,
+    };
+}
+export default connect(mapStateToProps)(App);
