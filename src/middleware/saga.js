@@ -1,4 +1,4 @@
-import { fork, take, call, put } from 'redux-saga/effects'
+import { fork, take, call, put, all } from 'redux-saga/effects'
 //import Api from './api'
 import { fetchErrorMessage } from './actions'
 
@@ -59,7 +59,7 @@ function* watchAndLog() {
 
 /******************************************************************************/
 export default function* root() {
-    yield [
+    yield all([
         fork(watchAndLog),
-    ]
+    ])
 }
