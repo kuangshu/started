@@ -72,8 +72,9 @@ module.exports = {
         // This is the URL that app is served from. We use "/" in development.
         publicPath: publicPath,
         // Point sourcemap entries to original disk location
-        devtoolModuleFilenameTemplate: info =>
-            path.resolve(info.absoluteResourcePath),
+        //console中显示文件名字太长 不方便调试
+        /*devtoolModuleFilenameTemplate: info =>
+            path.resolve(info.absoluteResourcePath),*/
 	},
 	resolve: {
         // This allows you to set a fallback for where Webpack should look for modules.
